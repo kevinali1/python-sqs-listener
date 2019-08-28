@@ -142,6 +142,7 @@ class SqsListener(object):
 
                     # catch problems with malformed JSON, usually a result of someone writing poor JSON directly in the AWS console
                     try:
+                        m_body = m_body.replace("'", '"')
                         params_dict = json.loads(m_body)
                     except:
                         sqs_logger.warning("Unable to parse message - JSON is not formatted properly")
